@@ -37,7 +37,7 @@
 </nav>
 
 <!-- Main content -->
-<main class="container py-4">
+<main class="container-fluid p-0 m-0 ">
     @yield('content')
 </main>
 

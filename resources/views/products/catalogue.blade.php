@@ -1,8 +1,49 @@
 @extends('layout.master')
-
 @section('content')
 
-    <div class="container py-5">
+<style>
+    html{
+        scroll-behavior: smooth
+    }
+#home {
+    width: 100%;
+    height: calc(100vh - 57px);
+    background-image: url("{{ asset('images/3d-render-modern-background-with-plexus-design.jpg') }}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* overlay خفيف باش النص يبان */
+#home::before {
+content: "";
+position: absolute;
+inset: 0;
+background: rgba(0,0,0,0.8);
+}
+</style>
+
+
+<div id="home" class="position-relative d-flex align-items-center justify-content-center">
+
+
+<div class="text-white text-center position-relative">
+<h1 class="fw-bold display-5">GreenTech Solutions 🌱</h1>
+<p class="lead">Catalogue de produits écologiques</p>
+<a href="#catalogue" class="btn btn-success btn-lg mt-3">
+    Voir le catalogue ↓
+</a>
+</div>
+
+
+</div>
+
+
+</div>
+    <div class="container py-5" id="catalogue">
 
         <!-- PAGE WRAPPER -->
         <div class="bg-white shadow-lg rounded-4 p-4 p-md-5">
