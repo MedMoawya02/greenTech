@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\Categorie;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -9,9 +11,20 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $query = Product::with('category');
+
+        if ($request->filled('q')) {
+            $query->where('name', 'like', '%' . $request->q . '%');
+        }
+
+        if($request->filled('category_id')){
+            $query->where('categorie_id',$request->category_id);
+        }
+        $products = $query->get();
+        $categories = Categorie::all();
+        return view('products.catalogue', compact('products','categories'));
     }
 
     /**
@@ -20,6 +33,7 @@ class ProductController extends Controller
     public function create()
     {
         //
+        return view('products.createProduct');
     }
 
     /**
@@ -27,7 +41,9 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Product::create($request->except('_token'));
+        return redirect()->route('products.index');
+
     }
 
     /**
@@ -44,6 +60,9 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         //
+        $product = Product::findOrFail($id);
+        $categories = Categorie::all();
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -52,6 +71,8 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        Product::findOrFail($id)->update($request->all());
+        return redirect()->route('products.index');
     }
 
     /**
@@ -60,5 +81,7 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+        Product::findOrFail($id)->delete();
+        return redirect()->route('products.index');
     }
 }

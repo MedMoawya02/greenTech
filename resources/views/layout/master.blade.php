@@ -14,7 +14,7 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow">
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/">
+        <a class="navbar-brand fw-bold" href="{{ route('products.index') }}">
             🌱 GreenTech
         </a>
 
@@ -26,10 +26,10 @@
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Catalogue</a>
+                    <a class="nav-link" href="{{ route('products.index') }}">Catalogue</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/createProduct">Ajouter</a>
+                    <a class="nav-link" href="{{route('products.create')}}">Ajouter</a>
                 </li>
             </ul>
         </div>

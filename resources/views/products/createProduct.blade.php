@@ -50,9 +50,8 @@ body.create-product {
 
                         <div class="card-body">
 
-                            <form method="POST" enctype="multipart/form-data">
-                                {{-- @csrf --}}
-
+                            <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data">
+                                @csrf
                                 <!-- Nom du produit -->
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">
@@ -60,21 +59,32 @@ body.create-product {
                                         Nom du produit
                                     </label>
                                     <input type="text"
+                                        name="name"
                                            class="form-control"
                                            placeholder="Ex : Plante verte naturelle">
                                 </div>
 
+                                 <!-- Description -->
+                                <div class="mb-3">
+                                    <label class="form-label fw-semibold">
+                                        <i class="bi bi-card-text text-success me-1"></i>
+                                        Description
+                                    </label>
+                                    <textarea class="form-control" name="description"
+                                              rows="4"
+                                              placeholder="Description du produit..."></textarea>
+                                </div>
                                 <!-- Catégorie -->
                                 <div class="mb-3">
                                     <label class="form-label fw-semibold">
                                         <i class="bi bi-grid-fill text-success me-1"></i>
                                         Catégorie
                                     </label>
-                                    <select class="form-select">
+                                    <select class="form-select" name="categorie_id">
                                         <option selected disabled>Choisir une catégorie</option>
-                                        <option>🌿 Plantes</option>
-                                        <option>🌱 Graines</option>
-                                        <option>🛠 Outils</option>
+                                        <option value="1">🌿 Plantes</option>
+                                        <option value="2">🌱 Graines</option>
+                                        <option value="3">🛠 Outils</option>
                                     </select>
                                 </div>
 
@@ -85,7 +95,7 @@ body.create-product {
                                             <i class="bi bi-currency-exchange text-success me-1"></i>
                                             Prix (MAD)
                                         </label>
-                                        <input type="number"
+                                        <input type="number" name="prix"
                                                class="form-control"
                                                placeholder="0.00">
                                     </div>
@@ -95,25 +105,16 @@ body.create-product {
                                             <i class="bi bi-box-seam text-success me-1"></i>
                                             Stock
                                         </label>
-                                        <input type="number"
+                                        <input type="number" name="stock"
                                                class="form-control"
                                                placeholder="Quantité disponible">
                                     </div>
                                 </div>
 
-                                <!-- Description -->
-                                <div class="mb-3">
-                                    <label class="form-label fw-semibold">
-                                        <i class="bi bi-card-text text-success me-1"></i>
-                                        Description
-                                    </label>
-                                    <textarea class="form-control"
-                                              rows="4"
-                                              placeholder="Description du produit..."></textarea>
-                                </div>
+                               
 
                                 <!-- Image -->
-                                <div class="mb-4">
+                               {{--  <div class="mb-4">
                                     <label class="form-label fw-semibold">
                                         <i class="bi bi-image-fill text-success me-1"></i>
                                         Image du produit
@@ -122,7 +123,7 @@ body.create-product {
                                     <div class="form-text">
                                         Formats acceptés : JPG, PNG – max 2MB
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <!-- Actions -->
                                 <div class="d-flex justify-content-between align-items-center">
