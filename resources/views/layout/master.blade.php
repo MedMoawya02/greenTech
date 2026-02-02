@@ -60,14 +60,14 @@
                     </li>
 
                     <!-- Bouton logout -->
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="btn btn-outline-danger btn-sm">
                                 Logout
                             </button>
                         </form>
-                    </li> --}}
+                    </li>
                 @endauth
 
           
