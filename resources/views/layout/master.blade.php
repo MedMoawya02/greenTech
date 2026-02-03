@@ -10,7 +10,25 @@
     {{-- @vite(['resources/css/app.css','resources/js/app.js']) --}}
 </head>
 <style>
-    
+    /* Bouton vert avec hover animé */
+    .btn-hover {
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-hover:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 128, 0, 0.4);
+    }
+
+    /* Avatar circulaire */
+    .avatar {
+        font-weight: 600;
+        user-select: none;
+    }
+
+    /* Optionnel : dropdown hover smooth */
+    .dropdown-menu {
+        transition: all 0.2s ease-in-out;
+    } 
 </style>
 <body class="bg-light text-dark">
 
@@ -25,52 +43,70 @@
             <i class="bi bi-leaf-fill fs-4"></i>
             GreenTech
         </a>
-        
+
         <!-- Toggler -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#mainNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
+
         <!-- Links -->
         <div class="collapse navbar-collapse" id="mainNavbar">
-            <ul class="navbar-nav ms-auto align-items-lg-center gap-2">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-3">
 
+                <!-- Catalogue -->
                 <li class="nav-item">
                     <a class="nav-link fw-medium {{ request()->routeIs('products.index') ? 'active text-success' : '' }}"
                        href="{{ route('products.index') }}">
                         Catalogue
                     </a>
                 </li>
-                
+
+                <!-- Nouveau produit -->
                 <li class="nav-item">
-                    <a class="btn btn-success btn-sm px-3"
+                    <a class="btn btn-success btn-sm px-3 d-flex align-items-center gap-1 btn-hover"
                        href="{{ route('products.create') }}">
-                        <i class="bi bi-plus-lg me-1"></i>
+                        <i class="bi bi-plus-lg"></i>
                         Nouveau produit
                     </a>
                 </li>
 
                 @auth
-                    <!-- Nom de l'utilisateur -->
-                    <li class="nav-item">
-                        <span class="nav-link fw-bold text-dark">
-                            {{ auth()->user()->name }}
-                        </span>
-                    </li>
+                    <!-- Dropdown utilisateur avec avatar -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-2 fw-bold text-dark"
+                           href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                    <!-- Bouton logout -->
-                    <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button type="submit" class="btn btn-outline-danger btn-sm">
-                                Logout
-                            </button>
-                        </form>
+                            <!-- Avatar circulaire avec initiales -->
+                            <div class="avatar bg-success text-white rounded-circle d-flex align-items-center justify-content-center"
+                                 style="width:35px; height:35px; font-size:0.9rem;">
+                                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                            </div>
+
+                            {{ auth()->user()->name }}
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="bi bi-box-arrow-right me-1"></i> Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
                 @endauth
 
-          
+                @guest
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="{{ route('login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="{{ route('register') }}">Register</a>
+                    </li>
+                @endguest
+
             </ul>
         </div>
     </div>

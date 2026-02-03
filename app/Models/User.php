@@ -53,4 +53,8 @@ class User extends Authenticatable
     public function isClient(){
         return $this->role==='client';
     }
+
+    public function favorites(){
+        return $this->belongsToMany(Product::class,'favorites')->withTimestamps();
+    }
 }
