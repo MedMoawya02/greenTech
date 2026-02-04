@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Créer un compte</title>
+    <title>Créer un compte – GreenPlants</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap 5 -->
@@ -11,59 +11,87 @@
     <style>
         body {
             min-height: 100vh;
-            background: linear-gradient(135deg, #0d6efd, #6610f2);
+            background: linear-gradient(135deg, #14532d, #22c55e);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', system-ui, sans-serif;
         }
 
         .auth-card {
-            background: #fff;
-            border-radius: 18px;
-            box-shadow: 0 25px 50px rgba(0,0,0,.2);
-            padding: 40px;
+            background: #f0fdf4;
+            border-radius: 24px;
+            box-shadow: 0 30px 70px rgba(0,0,0,.25);
+            padding: 42px;
             width: 100%;
-            max-width: 450px;
-        }
-
-        .auth-card h3 {
-            font-weight: 700;
-        }
-
-        .form-control {
-            height: 48px;
-            border-radius: 10px;
-        }
-
-        .form-control:focus {
-            box-shadow: none;
-            border-color: #0d6efd;
-        }
-
-        .btn-primary {
-            height: 48px;
-            border-radius: 10px;
-            font-weight: 600;
-        }
-
-        .auth-footer a {
-            text-decoration: none;
-            font-weight: 600;
+            max-width: 460px;
+            border: 1px solid #bbf7d0;
         }
 
         .logo {
-            width: 60px;
-            height: 60px;
-            background: #0d6efd;
-            color: #fff;
-            font-size: 28px;
-            font-weight: bold;
+            width: 78px;
+            height: 78px;
+            background: linear-gradient(135deg, #22c55e, #15803d);
+            color: #ecfdf5;
+            font-size: 34px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
+            margin: 0 auto 18px;
+            box-shadow: 0 14px 30px rgba(34,197,94,.6);
+        }
+
+        h3 {
+            font-weight: 800;
+            color: #14532d;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #166534;
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 14px;
+            color: #166534;
+        }
+
+        .form-control {
+            height: 52px;
+            border-radius: 14px;
+            border: 1px solid #bbf7d0;
+            padding-left: 16px;
+            background: #ffffff;
+        }
+
+        .form-control:focus {
+            border-color: #22c55e;
+            box-shadow: 0 0 0 0.2rem rgba(34,197,94,.25);
+        }
+
+        .btn-primary {
+            height: 54px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #22c55e, #15803d);
+            border: none;
+            font-weight: 600;
+            letter-spacing: .4px;
+        }
+
+        .btn-primary:hover {
+            opacity: .95;
+        }
+
+        .auth-footer a {
+            color: #15803d;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .auth-footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -71,9 +99,12 @@
 
 <div class="auth-card">
 
-    <div class="logo">A</div>
+    <div class="logo">🌿</div>
 
-    <h3 class="text-center mb-4">Créer un compte</h3>
+    <h3 class="text-center mb-1">Créer un compte</h3>
+    <p class="text-center subtitle mb-4">
+        Gérez et découvrez vos plantes facilement
+    </p>
 
     {{-- Erreurs --}}
     @if ($errors->any())
@@ -87,50 +118,35 @@
     @endif
 
     <form method="POST" action="{{ route('registerCreate') }}">
-        @method('post')
         @csrf
 
         <div class="mb-3">
             <label class="form-label">Nom complet</label>
-            <input type="text"
-                   name="name"
-                   class="form-control"
-                   value="{{ old('name') }}"
-                   placeholder="Votre nom"
-                   required>
+            <input type="text" name="name" class="form-control"
+                   value="{{ old('name') }}" placeholder="Votre nom" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Adresse email</label>
-            <input type="email"
-                   name="email"
-                   class="form-control"
-                   value="{{ old('email') }}"
-                   placeholder="email@example.com"
-                   required>
+            <input type="email" name="email" class="form-control"
+                   value="{{ old('email') }}" placeholder="email@example.com" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Mot de passe</label>
-            <input type="password"
-                   name="password"
-                   class="form-control"
-                   placeholder="********"
-                   required>
+            <input type="password" name="password"
+                   class="form-control" placeholder="••••••••" required>
         </div>
 
         <div class="mb-4">
             <label class="form-label">Confirmer le mot de passe</label>
-            <input type="password"
-                   name="password_confirmation"
-                   class="form-control"
-                   placeholder="********"
-                   required>
+            <input type="password" name="password_confirmation"
+                   class="form-control" placeholder="••••••••" required>
         </div>
 
         <div class="d-grid">
             <button type="submit" class="btn btn-primary">
-                Créer mon compte
+                🌱 Créer mon compte
             </button>
         </div>
     </form>
