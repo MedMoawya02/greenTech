@@ -51,6 +51,10 @@ Route::middleware(['auth', AdminMiddleware::class])->group(function () {
 Route::middleware(['auth', ClientMiddleware::class])->group(function () {
     Route::post('/favorites/{product}', [FavoriteController::class, 'toggle'])
         ->name('favorites.toggle');
+    Route::get('/favorites', [FavoriteController::class, 'favorites'])
+        ->name('favorites.products');
+        
+
 });
 
 
